@@ -1,0 +1,714 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/5/2021 11:50:10 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{39BCBDFB-786D-4E32-87FF-6E333164A479}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extrat KGradesTbl"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{D94DD17A-C989-4DE0-8952-BFC2445AE05B}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{3945024D-1A7E-4DF7-8D21-362DCC60204D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      name="Update Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\KGradesTbl"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="KGradesTbl"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[KGradesTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\KGradesTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{4A7AC0F5-740C-4E37-B2F9-A234AEFD4BF3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NAYA_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KDateFld]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KDateFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KDateFld]"
+                      name="KDateFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KStudentIdFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KStudentIdFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KStudentIdFld]"
+                      name="KStudentIdFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KGradeFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KGradeFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KGradeFld]"
+                      name="KGradeFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentTypeFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAssignmentTypeFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentTypeFld]"
+                      name="KAssignmentTypeFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAssignmentFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentFld]"
+                      name="KAssignmentFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]"
+                      name="KCourseFld"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KStudentIdFld]"
+                      dataType="i4"
+                      name="KStudentIdFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFld]"
+                      dataType="i4"
+                      name="KCourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KGradeFld]"
+                      dataType="r8"
+                      name="KGradeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAssignmentTypeFld]"
+                      dataType="i4"
+                      name="KAssignmentTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KGradePercentageFld]"
+                      dataType="i4"
+                      name="KGradePercentageFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[updateduserid]"
+                      dataType="i4"
+                      name="updateduserid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[updateddate]"
+                      dataType="dbTimeStamp"
+                      name="updateddate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[containertable]"
+                      dataType="wstr"
+                      length="50"
+                      name="containertable" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[parentid]"
+                      dataType="i4"
+                      name="parentid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAssignmentFld]"
+                      dataType="i4"
+                      name="KAssignmentFld" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KDateFld]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KDateFld]"
+                      name="KDateFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KStudentIdFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KStudentIdFld]"
+                      name="KStudentIdFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KGradeFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KGradeFld]"
+                      name="KGradeFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KAssignmentTypeFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KAssignmentTypeFld]"
+                      name="KAssignmentTypeFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KAssignmentFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KAssignmentFld]"
+                      name="KAssignmentFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFld]"
+                      name="KCourseFld" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\STG KGradesTbl"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG KGradesTbl"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[KGradesTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\STG KGradesTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KDateFld]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="KDateFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDateFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KDateFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KStudentIdFld]"
+                      cachedDataType="i4"
+                      cachedName="KStudentIdFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStudentIdFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KStudentIdFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KGradeFld]"
+                      cachedDataType="r8"
+                      cachedName="KGradeFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KGradeFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KGradeFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KAssignmentTypeFld]"
+                      cachedDataType="i4"
+                      cachedName="KAssignmentTypeFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KAssignmentTypeFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentTypeFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KAssignmentFld]"
+                      cachedDataType="i4"
+                      cachedName="KAssignmentFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KAssignmentFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KAssignmentFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[KCourseFld]"
+                      cachedDataType="i4"
+                      cachedName="KCourseFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFld]"
+                      lineageId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].Columns[Update Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Update Date"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStudentIdFld]"
+                      dataType="i4"
+                      name="KStudentIdFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KGradeFld]"
+                      dataType="r8"
+                      name="KGradeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KAssignmentTypeFld]"
+                      dataType="i4"
+                      name="KAssignmentTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KAssignmentFld]"
+                      dataType="i4"
+                      name="KAssignmentFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFld]"
+                      dataType="i4"
+                      name="KCourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      dataType="dbTimeStamp"
+                      name="Update Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\STG KGradesTbl.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KGradesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KGradesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KGradesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\STG KGradesTbl.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\KGradesTbl.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate KGradesTbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{DA851EAE-D84B-4E25-96F1-C0686B8232BD}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate KGradesTbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[KGradesTbl]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C8D58933-DFB9-4410-89D0-63D929FFF874}"
+      DTS:From="Package\Truncate KGradesTbl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="283.5,61.5" />
+        <NodeLayout
+          Size="178,42"
+          Id="Package\Truncate KGradesTbl"
+          TopLeft="35,62" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="213,82.75">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="70.5,0"
+              Start="0,0"
+              End="63,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="63,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="155,42"
+          Id="Package\Data Flow Task\STG KGradesTbl"
+          TopLeft="91.5,179.5" />
+        <NodeLayout
+          Size="133,42"
+          Id="Package\Data Flow Task\KGradesTbl"
+          TopLeft="99.5,9.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="87,91" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="165,51.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,39.5"
+              Start="0,0"
+              End="0,32">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,32" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="166.5,133">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,46.5"
+              Start="0,0"
+              End="0,39">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,39" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\STG KGradesTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\KGradesTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

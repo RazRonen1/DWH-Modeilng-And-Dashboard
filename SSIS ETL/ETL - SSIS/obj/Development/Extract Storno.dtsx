@@ -1,0 +1,495 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/9/2021 1:37:36 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{F44D79E7-B526-48D9-BCC5-FF793CB20953}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract Storno"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{A99E8909-4AAD-4405-A58D-933F7D88A472}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager]"
+      DTS:CreationName="EXCEL"
+      DTS:DTSID="{B4445C27-FF77-46A6-86A5-6DC96217B6C9}"
+      DTS:ObjectName="Excel Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\FINAL PROJECT\InputFiles\Storno\PaymentsStorno.xls;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{71B0ED4D-854F-47AC-80A4-D41EA8EDC893}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Excel Storno File"
+              componentClassID="Microsoft.ExcelSource"
+              contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Excel Source"
+              name="Excel Storno File"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">PaymentsStorno$</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mapping from parameters in the SQL command to variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\Excel Storno File.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Excel Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output]"
+                  name="Excel Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[StudentId]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[StudentId]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[StudentId]"
+                      name="StudentId"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[Courseld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[Courseld]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[Courseld]"
+                      name="Courseld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[PaymentDate]"
+                      dataType="date"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[PaymentDate]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[PaymentDate]"
+                      name="PaymentDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[STORNO]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[STORNO]"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[STORNO]"
+                      name="STORNO"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[StudentId]"
+                      dataType="r8"
+                      name="StudentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[Courseld]"
+                      dataType="r8"
+                      name="Courseld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[PaymentDate]"
+                      dataType="date"
+                      name="PaymentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].ExternalColumns[STORNO]"
+                      dataType="wstr"
+                      length="255"
+                      name="STORNO" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output]"
+                  isErrorOut="true"
+                  name="Excel Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[StudentId]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[StudentId]"
+                      name="StudentId" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[Courseld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[Courseld]"
+                      name="Courseld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[PaymentDate]"
+                      dataType="date"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[PaymentDate]"
+                      name="PaymentDate" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[STORNO]"
+                      dataType="wstr"
+                      length="255"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[STORNO]"
+                      name="STORNO" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\STG StornoTbl"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG StornoTbl"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[StornoTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\STG StornoTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].Columns[StudentId]"
+                      cachedDataType="r8"
+                      cachedName="StudentId"
+                      externalMetadataColumnId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[StudentId]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[StudentId]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].Columns[Courseld]"
+                      cachedDataType="r8"
+                      cachedName="Courseld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[Courseld]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[Courseld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].Columns[PaymentDate]"
+                      cachedDataType="date"
+                      cachedName="PaymentDate"
+                      externalMetadataColumnId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDate]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[PaymentDate]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].Columns[STORNO]"
+                      cachedDataType="wstr"
+                      cachedLength="255"
+                      cachedName="STORNO"
+                      externalMetadataColumnId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[STORNO]"
+                      lineageId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output].Columns[STORNO]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[StudentId]"
+                      dataType="i4"
+                      name="StudentId" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[Courseld]"
+                      dataType="i4"
+                      name="Courseld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDate]"
+                      dataType="dbTimeStamp"
+                      name="PaymentDate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input].ExternalColumns[STORNO]"
+                      dataType="wstr"
+                      length="255"
+                      name="STORNO" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\STG StornoTbl.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG StornoTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG StornoTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG StornoTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Excel Source Output]"
+              endId="Package\Data Flow Task\STG StornoTbl.Inputs[OLE DB Destination Input]"
+              name="Excel Source Output"
+              startId="Package\Data Flow Task\Excel Storno File.Outputs[Excel Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate StornoTbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{96C99F96-BCEB-4663-8179-DDE7F17E4B26}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate StornoTbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[StornoTbl]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{AC08C23E-CA7A-4447-9CFB-B5C9C1E339FD}"
+      DTS:From="Package\Truncate StornoTbl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="271,68" />
+        <NodeLayout
+          Size="169,42"
+          Id="Package\Truncate StornoTbl"
+          TopLeft="35,62" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="204,86">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="67,0"
+              Start="0,0"
+              End="59.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="59.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="147,42"
+          Id="Package\Data Flow Task\STG StornoTbl"
+          TopLeft="83,108" />
+        <NodeLayout
+          Size="157,42"
+          Id="Package\Data Flow Task\Excel Storno File"
+          TopLeft="77,23" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="156,65">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,43"
+              Start="0,0"
+              End="0,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\Excel Storno File">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\STG StornoTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

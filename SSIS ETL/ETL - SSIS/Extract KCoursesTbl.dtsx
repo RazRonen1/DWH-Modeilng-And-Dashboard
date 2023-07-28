@@ -1,0 +1,1107 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/5/2021 11:18:00 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{FEA71774-84C8-4DA8-9992-6B24ED38248D}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract KCoursesTbl"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{7A332A5F-DF31-4401-94A7-712B4CEBCE4F}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2342140A-BE1F-45C6-9107-9B7D0A9EA0C1}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      name="Update Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\KCoursesTbl"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="KCoursesTbl"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[KCoursesTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\KCoursesTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{4A7AC0F5-740C-4E37-B2F9-A234AEFD4BF3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NAYA_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KStartDateFld]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KStartDateFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KStartDateFld]"
+                      name="KStartDateFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KEndDateFld]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KEndDateFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KEndDateFld]"
+                      name="KEndDateFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KTitleFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]"
+                      name="KTitleFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMinStudentsNumFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KMinStudentsNumFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMinStudentsNumFld]"
+                      name="KMinStudentsNumFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMaxStudentsNumFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KMaxStudentsNumFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMaxStudentsNumFld]"
+                      name="KMaxStudentsNumFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KpriceFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KpriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KpriceFld]"
+                      name="KpriceFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KRegistrationOpenFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationOpenFld]"
+                      length="1"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KRegistrationOpenFld]"
+                      name="KRegistrationOpenFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[containerid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[containerid]"
+                      name="containerid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KLecturersTbl]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturersTbl]"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KLecturersTbl]"
+                      name="KLecturersTbl"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KDayPartFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KDayPartFld]"
+                      length="6"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KDayPartFld]"
+                      name="KDayPartFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KHoursFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KHoursFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KHoursFld]"
+                      name="KHoursFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KNoOfStudentsFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KNoOfStudentsFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KNoOfStudentsFld]"
+                      name="KNoOfStudentsFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KCourseFormatFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFormatFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KCourseFormatFld]"
+                      name="KCourseFormatFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KBusinessPriceFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KBusinessPriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KBusinessPriceFld]"
+                      name="KBusinessPriceFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KOriginalPriceFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KOriginalPriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KOriginalPriceFld]"
+                      name="KOriginalPriceFld"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KStartDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KStartDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KEndDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KEndDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KFinalProjectDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KFinalProjectDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KTitleFld]"
+                      dataType="i4"
+                      name="KTitleFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KClassNoFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KClassNoFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KGroupFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KGroupFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KActiveFld]"
+                      dataType="wstr"
+                      length="15"
+                      name="KActiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KpriceFld]"
+                      dataType="r8"
+                      name="KpriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KClassFld]"
+                      dataType="i4"
+                      name="KClassFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KMinStudentsNumFld]"
+                      dataType="i4"
+                      name="KMinStudentsNumFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KMaxStudentsNumFld]"
+                      dataType="i4"
+                      name="KMaxStudentsNumFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KArchiveFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KArchiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KHebYearFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KHebYearFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KIncludeInRegRptFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KIncludeInRegRptFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationOpenFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KRegistrationOpenFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[updateduserid]"
+                      dataType="i4"
+                      name="updateduserid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[updateddate]"
+                      dataType="dbTimeStamp"
+                      name="updateddate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[containertable]"
+                      dataType="wstr"
+                      length="50"
+                      name="containertable" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[parentid]"
+                      dataType="i4"
+                      name="parentid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturersTbl]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KLecturersTbl" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseMangerFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KCourseMangerFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KLocationFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KLocationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KDayPartFld]"
+                      dataType="wstr"
+                      length="6"
+                      name="KDayPartFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KStudentCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KStudentCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAdvanceFld]"
+                      dataType="i4"
+                      name="KAdvanceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseType2Fld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseType2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAdjustedFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KAdjustedFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KHoursFld]"
+                      dataType="i4"
+                      name="KHoursFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KOrganizationFld]"
+                      dataType="i4"
+                      name="KOrganizationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KContactFld]"
+                      dataType="i4"
+                      name="KContactFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KContact1Fld]"
+                      dataType="i4"
+                      name="KContact1Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseManagerFld]"
+                      dataType="i4"
+                      name="KCourseManagerFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KNoOfStudentsFld]"
+                      dataType="i4"
+                      name="KNoOfStudentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KBusinessOpportunityFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KBusinessOpportunityFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFormatFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseFormatFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KReasonOldFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KReasonOldFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseTypeFld]"
+                      dataType="i4"
+                      name="KCourseTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KBusinessOpportunityStatusFld]"
+                      dataType="i4"
+                      name="KBusinessOpportunityStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KBusinessPriceFld]"
+                      dataType="r8"
+                      name="KBusinessPriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KPriceQuoteFld]"
+                      dataType="i4"
+                      name="KPriceQuoteFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KAccountFld]"
+                      dataType="i4"
+                      name="KAccountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KLeadOriginFld]"
+                      dataType="i4"
+                      name="KLeadOriginFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KReasonFld]"
+                      dataType="i4"
+                      name="KReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].ExternalColumns[KOriginalPriceFld]"
+                      dataType="r8"
+                      name="KOriginalPriceFld" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KStartDateFld]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KStartDateFld]"
+                      name="KStartDateFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KEndDateFld]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KEndDateFld]"
+                      name="KEndDateFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KTitleFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KTitleFld]"
+                      name="KTitleFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KMinStudentsNumFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KMinStudentsNumFld]"
+                      name="KMinStudentsNumFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KMaxStudentsNumFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KMaxStudentsNumFld]"
+                      name="KMaxStudentsNumFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KpriceFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KpriceFld]"
+                      name="KpriceFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationOpenFld]"
+                      dataType="wstr"
+                      length="1"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationOpenFld]"
+                      name="KRegistrationOpenFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[containerid]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[containerid]"
+                      name="containerid" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KLecturersTbl]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KLecturersTbl]"
+                      name="KLecturersTbl" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KDayPartFld]"
+                      dataType="wstr"
+                      length="6"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KDayPartFld]"
+                      name="KDayPartFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KHoursFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KHoursFld]"
+                      name="KHoursFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KNoOfStudentsFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KNoOfStudentsFld]"
+                      name="KNoOfStudentsFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFormatFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFormatFld]"
+                      name="KCourseFormatFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KBusinessPriceFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KBusinessPriceFld]"
+                      name="KBusinessPriceFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KOriginalPriceFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Error Output].Columns[KOriginalPriceFld]"
+                      name="KOriginalPriceFld" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\STG KCoursesTbl"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG KCoursesTbl"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[KCoursesTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\STG KCoursesTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KStartDateFld]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="KStartDateFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStartDateFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KStartDateFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KEndDateFld]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="KEndDateFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KEndDateFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KEndDateFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KTitleFld]"
+                      cachedDataType="i4"
+                      cachedName="KTitleFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTitleFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KMinStudentsNumFld]"
+                      cachedDataType="i4"
+                      cachedName="KMinStudentsNumFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KMinStudentsNumFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMinStudentsNumFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KMaxStudentsNumFld]"
+                      cachedDataType="i4"
+                      cachedName="KMaxStudentsNumFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KMaxStudentsNumFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KMaxStudentsNumFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KpriceFld]"
+                      cachedDataType="r8"
+                      cachedName="KpriceFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KpriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KpriceFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KRegistrationOpenFld]"
+                      cachedDataType="wstr"
+                      cachedLength="1"
+                      cachedName="KRegistrationOpenFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationOpenFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KRegistrationOpenFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[containerid]"
+                      cachedDataType="i4"
+                      cachedName="containerid"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[containerid]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[containerid]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KLecturersTbl]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="KLecturersTbl"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KLecturersTbl]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KLecturersTbl]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KDayPartFld]"
+                      cachedDataType="wstr"
+                      cachedLength="6"
+                      cachedName="KDayPartFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDayPartFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KDayPartFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KHoursFld]"
+                      cachedDataType="i4"
+                      cachedName="KHoursFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KHoursFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KHoursFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KNoOfStudentsFld]"
+                      cachedDataType="i4"
+                      cachedName="KNoOfStudentsFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KNoOfStudentsFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KNoOfStudentsFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KCourseFormatFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KCourseFormatFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFormatFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KCourseFormatFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KBusinessPriceFld]"
+                      cachedDataType="r8"
+                      cachedName="KBusinessPriceFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KBusinessPriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KBusinessPriceFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[KOriginalPriceFld]"
+                      cachedDataType="r8"
+                      cachedName="KOriginalPriceFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KOriginalPriceFld]"
+                      lineageId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output].Columns[KOriginalPriceFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].Columns[Update Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Update Date"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStartDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KStartDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KEndDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KEndDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTitleFld]"
+                      dataType="i4"
+                      name="KTitleFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KMinStudentsNumFld]"
+                      dataType="i4"
+                      name="KMinStudentsNumFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KMaxStudentsNumFld]"
+                      dataType="i4"
+                      name="KMaxStudentsNumFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KpriceFld]"
+                      dataType="r8"
+                      name="KpriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationOpenFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KRegistrationOpenFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KLecturersTbl]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KLecturersTbl" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDayPartFld]"
+                      dataType="wstr"
+                      length="6"
+                      name="KDayPartFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KHoursFld]"
+                      dataType="i4"
+                      name="KHoursFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KNoOfStudentsFld]"
+                      dataType="i4"
+                      name="KNoOfStudentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFormatFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseFormatFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KBusinessPriceFld]"
+                      dataType="r8"
+                      name="KBusinessPriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[KOriginalPriceFld]"
+                      dataType="r8"
+                      name="KOriginalPriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      dataType="dbTimeStamp"
+                      name="Update Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\STG KCoursesTbl.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KCoursesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KCoursesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KCoursesTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\STG KCoursesTbl.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\KCoursesTbl.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate KCoursesTbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{61F51AEB-DBFF-4F90-BB7B-E7A811FF5A8D}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate KCoursesTbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[KCoursesTbl]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{1A32768B-61F8-490F-B508-CE4B10C24DF4}"
+      DTS:From="Package\Truncate KCoursesTbl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="273,98" />
+        <NodeLayout
+          Size="182,42"
+          Id="Package\Truncate KCoursesTbl"
+          TopLeft="41,94" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="223,117">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="50,0"
+              Start="0,0"
+              End="42.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="42.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="137,42"
+          Id="Package\Data Flow Task\KCoursesTbl"
+          TopLeft="151,39" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="155,124" />
+        <NodeLayout
+          Size="160,42"
+          Id="Package\Data Flow Task\STG KCoursesTbl"
+          TopLeft="147,215" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="219.5,81">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="12.5,43"
+              Start="0,0"
+              End="12.5,35.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5"
+                    Point2="0,21.5"
+                    Point3="4,21.5" />
+                  <mssgle:LineSegment
+                    End="8.5,21.5" />
+                  <mssgle:CubicBezierSegment
+                    Point1="8.5,21.5"
+                    Point2="12.5,21.5"
+                    Point3="12.5,25.5" />
+                  <mssgle:LineSegment
+                    End="12.5,35.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="229.5,166">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,49"
+              Start="0,0"
+              End="0,41.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\KCoursesTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\STG KCoursesTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

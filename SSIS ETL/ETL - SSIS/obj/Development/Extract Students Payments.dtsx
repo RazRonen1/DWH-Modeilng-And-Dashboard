@@ -1,0 +1,867 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/7/2021 6:49:18 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DelayValidation="True"
+  DTS:DTSID="{7692C998-E045-4A3B-863A-9A16FB6A2208}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract Students Payments"
+  DTS:PackageType="5"
+  DTS:VersionBuild="48"
+  DTS:VersionGUID="{D81CC219-9106-4D0C-B69B-7ED4419A07CD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Excel Connection Manager 3]"
+      DTS:CreationName="EXCEL"
+      DTS:DelayValidation="True"
+      DTS:DTSID="{F9A758D8-BD14-4561-9229-314FEDA68FE6}"
+      DTS:ObjectName="Excel Connection Manager 3">
+      <DTS:PropertyExpression
+        DTS:Name="ExcelFilePath">@[User::v_CurrentFilePath]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\FINAL PROJECT\InputFiles\Payments\StudentPayments_2013;Extended Properties=&quot;EXCEL 8.0;HDR=YES&quot;;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{10FAA5A5-3BAE-4667-8757-75930DCA347C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="v_CurrentFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">StudentPayments_2013</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B7703B5E-469F-415E-A154-CCA7F9CB4FDC}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[User::v_PaymentsDir] +  @[User::v_CurrentFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="v_CurrentFilePath">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\FINAL PROJECT\InputFiles\Payments\StudentPayments_2013</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{69AD28D4-8B71-4D5D-BA42-6776787E492A}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="v_HistoryDir">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\FINAL PROJECT\InputFiles\Payments\History\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{B1ED0360-19FF-49F9-9428-18E5F332A0ED}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="v_PaymentsDir">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\FINAL PROJECT\InputFiles\Payments\</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{813FF7E8-2CCF-43F0-9E6E-9E249ACA1B73}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{64E6755C-673B-4DAC-B623-1F68C4679A60}"
+        DTS:ObjectName="{64E6755C-673B-4DAC-B623-1F68C4679A60}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::v_PaymentsDir]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="D:\FINAL PROJECT\InputFiles\Payments\" />
+            <FEFEProperty
+              FileSpec="*.xls" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:DelayValidation="True"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{7D1E89A0-6FC9-47A8-82E4-CCDD114FB58D}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+                  componentClassID="Microsoft.DerivedColumn"
+                  contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+                  description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+                  name="Derived Column"
+                  usesDispositions="true">
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                      description="Input to the Derived Column Transformation"
+                      name="Derived Column Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[StudentId]"
+                          cachedDataType="r8"
+                          cachedName="StudentId"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[StudentId]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[Courseld]"
+                          cachedDataType="r8"
+                          cachedName="Courseld"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[Courseld]" />
+                      </inputColumns>
+                      <externalMetadataColumns />
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                      description="Default Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      name="Derived Column Output"
+                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CurrentPaymentFile]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          length="200"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CurrentPaymentFile]"
+                          name="CurrentPaymentFile"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">@[User::v_CurrentFilePath]</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">@[User::v_CurrentFilePath]</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]"
+                          name="LoadDate"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">[GETDATE]()</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">GETDATE()</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]"
+                          name="Derived Column 1"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_I4)#{Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[StudentId]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_I4)StudentId</property>
+                          </properties>
+                        </outputColumn>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 2]"
+                          dataType="i4"
+                          errorOrTruncationOperation="Computation"
+                          errorRowDisposition="FailComponent"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 2]"
+                          name="Derived Column 2"
+                          truncationRowDisposition="FailComponent">
+                          <properties>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Expression"
+                              name="Expression">(DT_I4)#{Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[Courseld]}</property>
+                            <property
+                              containsID="true"
+                              dataType="System.String"
+                              description="Derived Column Friendly Expression"
+                              expressionType="Notify"
+                              name="FriendlyExpression">(DT_I4)Courseld</property>
+                          </properties>
+                        </outputColumn>
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                      description="Error Output of the Derived Column Transformation"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="Derived Column Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Payments Files"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset"></property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT StudentId, Courseld, PaymentDate, PaymentNo, PaymentAmount
+FROM [StudentPayments$]
+WHERE ( StudentId is not null )</property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">2</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Connections[OleDbConnection]"
+                      connectionManagerID="Package.ConnectionManagers[Excel Connection Manager 3]"
+                      connectionManagerRefId="Package.ConnectionManagers[Excel Connection Manager 3]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[StudentId]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[StudentId]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[StudentId]"
+                          name="StudentId"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[Courseld]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[Courseld]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[Courseld]"
+                          name="Courseld"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentDate]"
+                          dataType="date"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentDate]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentDate]"
+                          name="PaymentDate"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentNo]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentNo]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentNo]"
+                          name="PaymentNo"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentAmount]"
+                          dataType="r8"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentAmount]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentAmount]"
+                          name="PaymentAmount"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[StudentId]"
+                          dataType="r8"
+                          name="StudentId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[Courseld]"
+                          dataType="r8"
+                          name="Courseld" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentDate]"
+                          dataType="date"
+                          name="PaymentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentNo]"
+                          dataType="r8"
+                          name="PaymentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].ExternalColumns[PaymentAmount]"
+                          dataType="r8"
+                          name="PaymentAmount" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[StudentId]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[StudentId]"
+                          name="StudentId" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[Courseld]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[Courseld]"
+                          name="Courseld" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentDate]"
+                          dataType="date"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentDate]"
+                          name="PaymentDate" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentNo]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentNo]"
+                          name="PaymentNo" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentAmount]"
+                          dataType="r8"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[PaymentAmount]"
+                          name="PaymentAmount" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments"
+                  componentClassID="Microsoft.OLEDBDestination"
+                  contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+                  description="OLE DB Destination"
+                  name="STG StudentsPayments"
+                  usesDispositions="true"
+                  version="4">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">[StudentsPayments]</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the column code page to use when code page information is unavailable from the data source."
+                      name="DefaultCodePage">1252</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Forces the use of the DefaultCodePage property value when describing character data."
+                      name="AlwaysUseDefaultCodePage">false</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">3</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepIdentity">false</property>
+                    <property
+                      dataType="System.Boolean"
+                      description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                      name="FastLoadKeepNulls">false</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                      name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                      name="FastLoadMaxInsertCommitSize">2147483647</property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Connections[OleDbConnection]"
+                      connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <inputs>
+                    <input
+                      refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input]"
+                      errorOrTruncationOperation="Insert"
+                      errorRowDisposition="FailComponent"
+                      hasSideEffects="true"
+                      name="OLE DB Destination Input">
+                      <inputColumns>
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[PaymentDate]"
+                          cachedDataType="date"
+                          cachedName="PaymentDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDate]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[PaymentNo]"
+                          cachedDataType="r8"
+                          cachedName="PaymentNo"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentNo]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentNo]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[PaymentAmount]"
+                          cachedDataType="r8"
+                          cachedName="PaymentAmount"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentAmount]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output].Columns[PaymentAmount]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[LoadDate]"
+                          cachedDataType="dbTimeStamp"
+                          cachedName="LoadDate"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[LoadDate]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[CurrentPaymentFile]"
+                          cachedDataType="wstr"
+                          cachedLength="200"
+                          cachedName="CurrentPaymentFile"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentFileName]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[CurrentPaymentFile]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[Derived Column 1]"
+                          cachedDataType="i4"
+                          cachedName="Derived Column 1"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[StudentId]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 1]" />
+                        <inputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].Columns[Derived Column 2]"
+                          cachedDataType="i4"
+                          cachedName="Derived Column 2"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[Courseld]"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Derived Column 2]" />
+                      </inputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentDate]"
+                          dataType="dbTimeStamp"
+                          name="PaymentDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentNo]"
+                          dataType="r8"
+                          name="PaymentNo" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentAmount]"
+                          dataType="r8"
+                          name="PaymentAmount" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[StudentId]"
+                          dataType="i4"
+                          name="StudentId" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[Courseld]"
+                          dataType="i4"
+                          name="Courseld" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[LoadDate]"
+                          dataType="dbTimeStamp"
+                          name="LoadDate" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input].ExternalColumns[PaymentFileName]"
+                          dataType="wstr"
+                          length="200"
+                          name="PaymentFileName" />
+                      </externalMetadataColumns>
+                    </input>
+                  </inputs>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Outputs[OLE DB Destination Error Output]"
+                      exclusionGroup="1"
+                      isErrorOut="true"
+                      name="OLE DB Destination Error Output"
+                      synchronousInputId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input]">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+              <paths>
+                <path
+                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
+                  endId="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments.Inputs[OLE DB Destination Input]"
+                  name="Derived Column Output"
+                  startId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+                <path
+                  refId="Package\Foreach Loop Container\Data Flow Task.Paths[Excel Source Output]"
+                  endId="Package\Foreach Loop Container\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  name="Excel Source Output"
+                  startId="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files.Outputs[Excel Source Output]" />
+              </paths>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Remove Files To History Dir"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{CEDAEFC2-A488-4424-A140-73358E14157F}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Remove Files To History Dir"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="MoveFile"
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="User::v_CurrentFilePath"
+              TaskIsSourceVariable="True"
+              TaskDestinationPath="User::v_HistoryDir"
+              TaskIsDestinationVariable="True" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{FF64E5C4-C1D0-44C1-BAF1-0109524FBDCF}"
+          DTS:From="Package\Foreach Loop Container\Data Flow Task"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Remove Files To History Dir" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{79C4F923-AD35-4AB5-BDC8-306150C58778}"
+          DTS:ObjectName="{79C4F923-AD35-4AB5-BDC8-306150C58778}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::v_CurrentFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate StudentsPayments Table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{3F640820-F42D-46F9-B73E-DC43408D730C}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate StudentsPayments Table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[StudentsPayments]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{56DE8689-492F-49D3-A921-99F356ACE2D9}"
+      DTS:From="Package\Truncate StudentsPayments Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Foreach Loop Container\Data Flow Task"
+          TopLeft="40,19" />
+        <NodeLayout
+          Size="210,42"
+          Id="Package\Foreach Loop Container\Remove Files To History Dir"
+          TopLeft="5.5,120" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="113,61">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,59"
+              Start="0,0"
+              End="0,51.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="253,182"
+          Size="253,225"
+          Id="Package\Foreach Loop Container"
+          TopLeft="11,132" />
+        <NodeLayout
+          Size="240,42"
+          Id="Package\Truncate StudentsPayments Table"
+          TopLeft="25,36" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="141.25,78">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,54"
+              Start="0,0"
+              End="0,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments"
+          TopLeft="127,191" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\Derived Column"
+          TopLeft="151,108" />
+        <NodeLayout
+          Size="176,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files"
+          TopLeft="139,21" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Excel Source Output]"
+          TopLeft="227.5,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Foreach Loop Container\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="224.75,150">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\STG StudentsPayments">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\Excel Payments Files">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

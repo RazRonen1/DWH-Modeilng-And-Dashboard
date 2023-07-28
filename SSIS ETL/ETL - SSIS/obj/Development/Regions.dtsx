@@ -1,0 +1,324 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/4/2021 7:42:42 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{CD13DBBD-87BF-4151-A4CD-0D851524E5E1}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Regions"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{9AC082A1-B40D-4637-BEA1-D4DD5E4244E5}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:PackageParameters>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{38CAECCB-FB51-4FC1-A5FB-3D626C570967}"
+      DTS:ObjectName="FolderPath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\FINAL PROJECT\</DTS:Property>
+    </DTS:PackageParameter>
+    <DTS:PackageParameter
+      DTS:CreationName=""
+      DTS:DataType="8"
+      DTS:DTSID="{90AEF9C0-0EFB-4B3D-BB88-7B8DCA46BCEA}"
+      DTS:ObjectName="PaymentsPath">
+      <DTS:Property
+        DTS:DataType="8"
+        DTS:Name="ParameterValue">D:\FINAL PROJECT\InputFiles\Payments\</DTS:Property>
+    </DTS:PackageParameter>
+  </DTS:PackageParameters>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{432A1A7D-0566-4344-A8C7-1410229DD7B4}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="CurrentRegionFileName">
+      <DTS:VariableValue
+        DTS:DataType="8">Regions01.xls</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{65B27A1E-2843-4FED-9150-97EB7F4FDC4C}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="RegionsPath">
+      <DTS:VariableValue
+        DTS:DataType="8">D:\FINAL PROJECT\InputFiles\Regions\</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{6CC16AD6-F24E-4DF6-91B5-98B9A34B4CEB}"
+      DTS:EvaluateAsExpression="True"
+      DTS:Expression="@[$Package::RegionsPath] +  @[User::CurrentRegionFileName]"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="V_CurrentRegionPath">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{56F0CD08-9B9E-4065-8A99-33FD2D6535DB}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{3555DCBC-D850-47A3-8A13-9D7E9F011810}"
+        DTS:ObjectName="{3555DCBC-D850-47A3-8A13-9D7E9F011810}">
+        <DTS:PropertyExpression
+          DTS:Name="Directory">@[User::RegionsPath]</DTS:PropertyExpression>
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="D:\FINAL PROJECT\InputFiles\Regions\" />
+            <FEFEProperty
+              FileSpec="*.*" />
+            <FEFEProperty
+              FileNameRetrievalType="1" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Data Flow Task"
+          DTS:CreationName="Microsoft.Pipeline"
+          DTS:Description="Data Flow Task"
+          DTS:DTSID="{90DAAEAE-4107-445E-8019-4968072AA4CA}"
+          DTS:ExecutableType="Microsoft.Pipeline"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Data Flow Task"
+          DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <pipeline
+              version="1">
+              <components>
+                <component
+                  refId="Package\Foreach Loop Container\Data Flow Task\Excel Source"
+                  componentClassID="Microsoft.ExcelSource"
+                  contactInfo="Excel Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+                  description="Excel Source"
+                  name="Excel Source"
+                  usesDispositions="true"
+                  version="1">
+                  <properties>
+                    <property
+                      dataType="System.Int32"
+                      description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                      name="CommandTimeout">0</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the name of the database object used to open a rowset."
+                      name="OpenRowset">גיליון1$</property>
+                    <property
+                      dataType="System.String"
+                      description="Specifies the variable that contains the name of the database object used to open a rowset."
+                      name="OpenRowsetVariable"></property>
+                    <property
+                      dataType="System.String"
+                      description="The SQL command to be executed."
+                      name="SqlCommand"
+                      UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                    <property
+                      dataType="System.String"
+                      description="The variable that contains the SQL command to be executed."
+                      name="SqlCommandVariable"></property>
+                    <property
+                      dataType="System.Int32"
+                      description="Specifies the mode used to access the database."
+                      name="AccessMode"
+                      typeConverter="AccessMode">0</property>
+                    <property
+                      dataType="System.String"
+                      description="The mapping from parameters in the SQL command to variables."
+                      name="ParameterMapping"></property>
+                  </properties>
+                  <connections>
+                    <connection
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Connections[OleDbConnection]"
+                      connectionManagerID="{774BFCAE-D672-4C9A-B416-D670BBAFBCFC}:external"
+                      connectionManagerRefId="Project.ConnectionManagers[Excel Connection Manager]"
+                      description="The OLE DB runtime connection used to access the database."
+                      name="OleDbConnection" />
+                  </connections>
+                  <outputs>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output]"
+                      name="Excel Source Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[שם יישוב]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[שם יישוב]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[שם יישוב]"
+                          name="שם יישוב"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[תיאור מחוז]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[תיאור מחוז]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[תיאור מחוז]"
+                          name="תיאור מחוז"
+                          truncationRowDisposition="FailComponent" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[איזור]"
+                          dataType="wstr"
+                          errorOrTruncationOperation="Conversion"
+                          errorRowDisposition="FailComponent"
+                          externalMetadataColumnId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[איזור]"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].Columns[איזור]"
+                          name="איזור"
+                          truncationRowDisposition="FailComponent" />
+                      </outputColumns>
+                      <externalMetadataColumns
+                        isUsed="True">
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[שם יישוב]"
+                          dataType="wstr"
+                          length="255"
+                          name="שם יישוב" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[תיאור מחוז]"
+                          dataType="wstr"
+                          length="255"
+                          name="תיאור מחוז" />
+                        <externalMetadataColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Output].ExternalColumns[איזור]"
+                          dataType="wstr"
+                          length="255"
+                          name="איזור" />
+                      </externalMetadataColumns>
+                    </output>
+                    <output
+                      refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output]"
+                      isErrorOut="true"
+                      name="Excel Source Error Output">
+                      <outputColumns>
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[שם יישוב]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[שם יישוב]"
+                          name="שם יישוב" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[תיאור מחוז]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[תיאור מחוז]"
+                          name="תיאור מחוז" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[איזור]"
+                          dataType="wstr"
+                          length="255"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[איזור]"
+                          name="איזור" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorCode]"
+                          name="ErrorCode"
+                          specialFlags="1" />
+                        <outputColumn
+                          refId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          dataType="i4"
+                          lineageId="Package\Foreach Loop Container\Data Flow Task\Excel Source.Outputs[Excel Source Error Output].Columns[ErrorColumn]"
+                          name="ErrorColumn"
+                          specialFlags="2" />
+                      </outputColumns>
+                      <externalMetadataColumns />
+                    </output>
+                  </outputs>
+                </component>
+              </components>
+            </pipeline>
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{A491B1DD-AC3B-489D-8C4A-A6FC2C939F71}"
+          DTS:ObjectName="{A491B1DD-AC3B-489D-8C4A-A6FC2C939F71}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::CurrentRegionFileName" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Foreach Loop Container\Data Flow Task"
+          TopLeft="32,15" />
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="278,191"
+          Size="278,234"
+          Id="Package\Foreach Loop Container"
+          TopLeft="15,10" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Foreach Loop Container\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="139,42"
+          Id="Package\Foreach Loop Container\Data Flow Task\Excel Source"
+          TopLeft="125,49" />
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Foreach Loop Container\Data Flow Task\Excel Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

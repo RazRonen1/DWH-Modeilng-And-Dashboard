@@ -1,0 +1,851 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/5/2021 12:20:21 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{60EF6DAA-23AE-4CBA-A807-485EAB7C1D5F}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract KMeetingsTbl"
+  DTS:PackageType="5"
+  DTS:VersionBuild="17"
+  DTS:VersionGUID="{1483D869-30D2-43EC-A55B-6995EDA28EB7}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{FD47130D-448E-49CD-913B-B0EA999DD116}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input].Columns[id]"
+                      cachedDataType="r8"
+                      cachedName="id"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      truncationRowDisposition="FailComponent"
+                      usageType="readWrite">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">(DT_I4)#{Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[id]}</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">(DT_I4)id</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      name="Update Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\KMeetingsTbl"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="KMeetingsTbl"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[KMeetingsTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\KMeetingsTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{4A7AC0F5-740C-4E37-B2F9-A234AEFD4BF3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NAYA_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTitleFld]"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]"
+                      name="KTitleFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTimeStartFld]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTimeStartFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTimeStartFld]"
+                      name="KTimeStartFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KStartHourFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KStartHourFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KStartHourFld]"
+                      name="KStartHourFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KEndHourFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KEndHourFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KEndHourFld]"
+                      name="KEndHourFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTypeFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTypeFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTypeFld]"
+                      name="KTypeFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KActiveFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KActiveFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KActiveFld]"
+                      name="KActiveFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KLecturerFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturerFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KLecturerFld]"
+                      name="KLecturerFld"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTitleFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KTitleFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDayFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KDayFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTimeStartFld]"
+                      dataType="dbTimeStamp"
+                      name="KTimeStartFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KStartHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KStartHourFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KEndHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KEndHourFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTypeFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCodeFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCodeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KActiveFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KActiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturerFld]"
+                      dataType="i4"
+                      name="KLecturerFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KStudentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KStudentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFld]"
+                      dataType="i4"
+                      name="KCourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KMeetingLocationFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KMeetingLocationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[updateduserid]"
+                      dataType="i4"
+                      name="updateduserid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[updateddate]"
+                      dataType="dbTimeStamp"
+                      name="updateddate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[containertable]"
+                      dataType="wstr"
+                      length="50"
+                      name="containertable" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[parentid]"
+                      dataType="i4"
+                      name="parentid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDescriptionFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KDescriptionFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KMeetingTimeFld]"
+                      dataType="i4"
+                      name="KMeetingTimeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPriorityFld]"
+                      dataType="i4"
+                      name="KPriorityFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturer2Fld]"
+                      dataType="i4"
+                      name="KLecturer2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCoursePatternMeetingIdFld]"
+                      dataType="i4"
+                      name="KCoursePatternMeetingIdFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KClassroomArrangementFld]"
+                      dataType="wstr"
+                      length="500"
+                      name="KClassroomArrangementFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturer3Fld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KLecturer3Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KActualMeetingLocationFld]"
+                      dataType="i4"
+                      name="KActualMeetingLocationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].ExternalColumns[KModuleFld]"
+                      dataType="i4"
+                      name="KModuleFld" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTitleFld]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTitleFld]"
+                      name="KTitleFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTimeStartFld]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTimeStartFld]"
+                      name="KTimeStartFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KStartHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KStartHourFld]"
+                      name="KStartHourFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KEndHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KEndHourFld]"
+                      name="KEndHourFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTypeFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KTypeFld]"
+                      name="KTypeFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KActiveFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KActiveFld]"
+                      name="KActiveFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KLecturerFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Error Output].Columns[KLecturerFld]"
+                      name="KLecturerFld" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\STG KMeetingsTbl"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG KMeetingsTbl"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[KMeetingsTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\STG KMeetingsTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="r8"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KTitleFld]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="KTitleFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTitleFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTitleFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KTimeStartFld]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="KTimeStartFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTimeStartFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTimeStartFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KStartHourFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KStartHourFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStartHourFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KStartHourFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KEndHourFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KEndHourFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KEndHourFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KEndHourFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KTypeFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KTypeFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTypeFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KTypeFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KActiveFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KActiveFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KActiveFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KActiveFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[KLecturerFld]"
+                      cachedDataType="i4"
+                      cachedName="KLecturerFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KLecturerFld]"
+                      lineageId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output].Columns[KLecturerFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].Columns[Update Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Update Date"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTitleFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KTitleFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTimeStartFld]"
+                      dataType="dbTimeStamp"
+                      name="KTimeStartFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KStartHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KStartHourFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KEndHourFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KEndHourFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTypeFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KActiveFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KActiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KLecturerFld]"
+                      dataType="i4"
+                      name="KLecturerFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      dataType="dbTimeStamp"
+                      name="Update Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\STG KMeetingsTbl.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KMeetingsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KMeetingsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KMeetingsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\STG KMeetingsTbl.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\KMeetingsTbl.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate KMeetingsTbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{aaf29d06-07df-4d7a-ab8a-5cdd36af6128}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate KMeetingsTbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[KMeetingsTbl]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{E29C7CD5-AAE3-4E5D-A7B1-0CC406F54B9B}"
+      DTS:From="Package\Truncate KMeetingsTbl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="49.5,161.5" />
+        <NodeLayout
+          Size="187,42"
+          Id="Package\Truncate KMeetingsTbl"
+          TopLeft="35.5,69.5" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="127,111.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,50"
+              Start="0,0"
+              End="0,42.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,42.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\Data Flow Task\STG KMeetingsTbl"
+          TopLeft="43.5,159.5" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="49,89" />
+        <NodeLayout
+          Size="142,42"
+          Id="Package\Data Flow Task\KMeetingsTbl"
+          TopLeft="51.5,9.5" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="124.25,51.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,37.5"
+              Start="0,0"
+              End="0,30">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,30" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="126,131">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.5"
+              Start="0,0"
+              End="0,21">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\STG KMeetingsTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\KMeetingsTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

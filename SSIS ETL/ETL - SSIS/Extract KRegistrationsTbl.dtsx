@@ -1,0 +1,1278 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="8/5/2021 11:49:50 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-LCICVTU"
+  DTS:CreatorName="DESKTOP-LCICVTU\NAYA ACADEMY"
+  DTS:DTSID="{6EF309BA-13A8-4FBF-8A63-6A07251A9E2B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="14.0.0800.60"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Extract KRegistrationsTbl"
+  DTS:PackageType="5"
+  DTS:VersionBuild="13"
+  DTS:VersionGUID="{8D17A01C-27CB-4E0E-B63C-108B6C47F9DD}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{68597520-8115-41BF-B547-FE23E74ACDD6}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\Derived Column"
+              componentClassID="Microsoft.DerivedColumn"
+              contactInfo="Derived Column;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Creates new column values by applying expressions to transformation input columns. Create new columns or overwrite existing ones. For example, concatenate the values from the 'first name' and 'last name' column to make a 'full name' column."
+              name="Derived Column"
+              usesDispositions="true">
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+                  description="Input to the Derived Column Transformation"
+                  name="Derived Column Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]"
+                  description="Default Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  name="Derived Column Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Computation"
+                      errorRowDisposition="FailComponent"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]"
+                      name="Update Date"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Expression"
+                          name="Expression">[GETDATE]()</property>
+                        <property
+                          containsID="true"
+                          dataType="System.String"
+                          description="Derived Column Friendly Expression"
+                          expressionType="Notify"
+                          name="FriendlyExpression">GETDATE()</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output]"
+                  description="Error Output of the Derived Column Transformation"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Derived Column Error Output"
+                  synchronousInputId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\KRegistrationsTbl"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="KRegistrationsTbl"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[KRegistrationsTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\KRegistrationsTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{4A7AC0F5-740C-4E37-B2F9-A234AEFD4BF3}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.NAYA_OLTP]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationStatusFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationStatusFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationStatusFld]"
+                      name="KRegistrationStatusFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegisteredToFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegisteredToFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegisteredToFld]"
+                      name="KRegisteredToFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]"
+                      name="KCourseFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCoursepriceFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCoursepriceFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCoursepriceFld]"
+                      name="KCoursepriceFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountFld]"
+                      name="KDiscountFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[containerid]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[containerid]"
+                      name="containerid"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountInNisFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountInNisFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountInNisFld]"
+                      name="KDiscountInNisFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationDateFld]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationDateFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationDateFld]"
+                      name="KRegistrationDateFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCategoryFld]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCategoryFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCategoryFld]"
+                      name="KCategoryFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDropoutReasonFld]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDropoutReasonFld]"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDropoutReasonFld]"
+                      name="KDropoutReasonFld"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KTotalAmountFld]"
+                      dataType="r8"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTotalAmountFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KTotalAmountFld]"
+                      name="KTotalAmountFld"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KStudentFld]"
+                      dataType="i4"
+                      name="KStudentFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationStatus_OldFld]"
+                      dataType="i4"
+                      name="KRegistrationStatus_OldFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationStatusFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KRegistrationStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegisteredToFld]"
+                      dataType="i4"
+                      name="KRegisteredToFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFld]"
+                      dataType="i4"
+                      name="KCourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCoursepriceFld]"
+                      dataType="r8"
+                      name="KCoursepriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPayStatusFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KPayStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPaytermsFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KPaytermsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KNoOfPaysFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KNoOfPaysFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountFld]"
+                      dataType="i4"
+                      name="KDiscountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPayCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KPayCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountReasonFlld]"
+                      dataType="wstr"
+                      length="500"
+                      name="KDiscountReasonFlld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KWhatWasSentFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KWhatWasSentFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSentDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KSentDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KUpdatedby2Fld]"
+                      dataType="i4"
+                      name="KUpdatedby2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KArchiveFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KArchiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KZoneFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KZoneFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[updateduserid]"
+                      dataType="i4"
+                      name="updateduserid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[updateddate]"
+                      dataType="dbTimeStamp"
+                      name="updateddate" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[containertable]"
+                      dataType="wstr"
+                      length="50"
+                      name="containertable" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[parentid]"
+                      dataType="i4"
+                      name="parentid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDropoutReasonFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KDropoutReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturerCommentsFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KLecturerCommentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountInNisFld]"
+                      dataType="i4"
+                      name="KDiscountInNisFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KOld_idFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KOld_idFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KOld_id2Fld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KOld_id2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTotalAmountFld]"
+                      dataType="r8"
+                      name="KTotalAmountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSendEmailFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KSendEmailFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSendSMSFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KSendSMSFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KBooksFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KBooksFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KStartPayDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KStartPayDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPaymentStatusFld]"
+                      dataType="i4"
+                      name="KPaymentStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KAdvancePaymentFld]"
+                      dataType="i4"
+                      name="KAdvancePaymentFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KReceivedDiplomaFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KReceivedDiplomaFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTurnedProjectFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KTurnedProjectFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSignedAgreementFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KSignedAgreementFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSignedanAgreementFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KSignedanAgreementFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KRegistrationDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KYearFld]"
+                      dataType="i4"
+                      name="KYearFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KGradeFld]"
+                      dataType="i4"
+                      name="KGradeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KFacultyNameFld]"
+                      dataType="i4"
+                      name="KFacultyNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KExemptionReasonFld]"
+                      dataType="wstr"
+                      length="250"
+                      name="KExemptionReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[old_id]"
+                      dataType="i4"
+                      name="old_id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[grouping]"
+                      dataType="i4"
+                      name="grouping" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[group_]"
+                      dataType="i4"
+                      name="group_" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPercentageDiscountReasonFld]"
+                      dataType="wstr"
+                      length="500"
+                      name="KPercentageDiscountReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDiscountReasonFld]"
+                      dataType="wstr"
+                      length="200"
+                      name="KDiscountReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KFacultiesFld]"
+                      dataType="i4"
+                      name="KFacultiesFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KAdvanceRegistrationFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KAdvanceRegistrationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KEntitledToDiplomaFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KEntitledToDiplomaFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseOldDetailsFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KCourseOldDetailsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSchoolBranchFld]"
+                      dataType="i4"
+                      name="KSchoolBranchFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDayFld]"
+                      dataType="i4"
+                      name="KDayFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KApprovedArrivalFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KApprovedArrivalFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KOldRegistrationDateFld]"
+                      dataType="wstr"
+                      length="15"
+                      name="KOldRegistrationDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KDayPeriodFld]"
+                      dataType="wstr"
+                      length="4"
+                      name="KDayPeriodFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KProductTypeFld]"
+                      dataType="wstr"
+                      length="10"
+                      name="KProductTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KOldProdNameFld]"
+                      dataType="wstr"
+                      length="12"
+                      name="KOldProdNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KAmtPaidFld]"
+                      dataType="wstr"
+                      length="15"
+                      name="KAmtPaidFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KSerialNoFld]"
+                      dataType="wstr"
+                      length="20"
+                      name="KSerialNoFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTotalAmountOldFld]"
+                      dataType="wstr"
+                      length="15"
+                      name="KTotalAmountOldFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseStartDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KCourseStartDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KIsActiveFld]"
+                      dataType="wstr"
+                      length="2"
+                      name="KIsActiveFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KHandlerOldFld]"
+                      dataType="wstr"
+                      length="20"
+                      name="KHandlerOldFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KServiceMonthsFld]"
+                      dataType="i4"
+                      name="KServiceMonthsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegisteredToOldFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KRegisteredToOldFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KIsAssistantFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KIsAssistantFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCreateDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KCreateDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KFirstNameFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KFirstNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLastNameFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KLastNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KENNameFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KENNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPhoneFld]"
+                      dataType="wstr"
+                      length="20"
+                      name="KPhoneFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KEmailFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KEmailFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRoleFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KRoleFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPaymentSourceFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KPaymentSourceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KOrganizationFld]"
+                      dataType="i4"
+                      name="KOrganizationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPaymentSourseFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KPaymentSourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCategory2Fld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCategory2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KIsGroupRegFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KIsGroupRegFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCategoryFld]"
+                      dataType="i4"
+                      name="KCategoryFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KModulesFld]"
+                      dataType="wstr"
+                      length="200"
+                      name="KModulesFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KIDFld]"
+                      dataType="wstr"
+                      length="15"
+                      name="KIDFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KBusinessOpportunityFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KBusinessOpportunityFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseFormatFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseFormatFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KNoOfStudentsFld]"
+                      dataType="i4"
+                      name="KNoOfStudentsFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLecturersFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KLecturersFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLocationFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KLocationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KReasonFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KContactFld]"
+                      dataType="i4"
+                      name="KContactFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KContact1Fld]"
+                      dataType="i4"
+                      name="KContact1Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseType2Fld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseType2Fld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRecommenderFld]"
+                      dataType="wstr"
+                      length="1"
+                      name="KRecommenderFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KJobFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KJobFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KExamsAverageFld]"
+                      dataType="i4"
+                      name="KExamsAverageFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KProjectGradeFld]"
+                      dataType="i4"
+                      name="KProjectGradeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KGuideOpinionFld]"
+                      dataType="wstr"
+                      length="4000"
+                      name="KGuideOpinionFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KCourseTypeFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KCourseTypeFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTextualCourseNameFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KTextualCourseNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTextualCourseTypeNameFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KTextualCourseTypeNameFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KPriceQuoteFld]"
+                      dataType="i4"
+                      name="KPriceQuoteFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KAccountFld]"
+                      dataType="i4"
+                      name="KAccountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KTextualOrganizationFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KTextualOrganizationFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KRegistrationSecondaryStatusFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KRegistrationSecondaryStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].ExternalColumns[KLeadOriginFld]"
+                      dataType="i4"
+                      name="KLeadOriginFld" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[id]"
+                      name="id" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationStatusFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationStatusFld]"
+                      name="KRegistrationStatusFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegisteredToFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegisteredToFld]"
+                      name="KRegisteredToFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCourseFld]"
+                      name="KCourseFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCoursepriceFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCoursepriceFld]"
+                      name="KCoursepriceFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDiscountFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDiscountFld]"
+                      name="KDiscountFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[containerid]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[containerid]"
+                      name="containerid" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDiscountInNisFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDiscountInNisFld]"
+                      name="KDiscountInNisFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationDateFld]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KRegistrationDateFld]"
+                      name="KRegistrationDateFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCategoryFld]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KCategoryFld]"
+                      name="KCategoryFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDropoutReasonFld]"
+                      dataType="wstr"
+                      length="50"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KDropoutReasonFld]"
+                      name="KDropoutReasonFld" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KTotalAmountFld]"
+                      dataType="r8"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Error Output].Columns[KTotalAmountFld]"
+                      name="KTotalAmountFld" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\STG KRegistrationsTbl"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="STG KRegistrationsTbl"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[KRegistrationsTbl]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\STG KRegistrationsTbl.Connections[OleDbConnection]"
+                  connectionManagerID="{FED7313F-E642-42B5-B32F-18A20669D149}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[LocalHost.STG_NAYA]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KRegistrationStatusFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KRegistrationStatusFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationStatusFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationStatusFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KRegisteredToFld]"
+                      cachedDataType="i4"
+                      cachedName="KRegisteredToFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegisteredToFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegisteredToFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KCourseFld]"
+                      cachedDataType="i4"
+                      cachedName="KCourseFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCourseFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KCoursepriceFld]"
+                      cachedDataType="r8"
+                      cachedName="KCoursepriceFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCoursepriceFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCoursepriceFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KDiscountFld]"
+                      cachedDataType="i4"
+                      cachedName="KDiscountFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDiscountFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[containerid]"
+                      cachedDataType="i4"
+                      cachedName="containerid"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[containerid]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[containerid]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KDiscountInNisFld]"
+                      cachedDataType="i4"
+                      cachedName="KDiscountInNisFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDiscountInNisFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDiscountInNisFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KRegistrationDateFld]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="KRegistrationDateFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationDateFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KRegistrationDateFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KCategoryFld]"
+                      cachedDataType="i4"
+                      cachedName="KCategoryFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCategoryFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KCategoryFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KTotalAmountFld]"
+                      cachedDataType="r8"
+                      cachedName="KTotalAmountFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTotalAmountFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KTotalAmountFld]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[Update Date]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="Update Date"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      lineageId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output].Columns[Update Date]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].Columns[KDropoutReasonFld]"
+                      cachedDataType="wstr"
+                      cachedLength="50"
+                      cachedName="KDropoutReasonFld"
+                      externalMetadataColumnId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDropoutReasonFld]"
+                      lineageId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output].Columns[KDropoutReasonFld]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationStatusFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KRegistrationStatusFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegisteredToFld]"
+                      dataType="i4"
+                      name="KRegisteredToFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCourseFld]"
+                      dataType="i4"
+                      name="KCourseFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCoursepriceFld]"
+                      dataType="r8"
+                      name="KCoursepriceFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDiscountFld]"
+                      dataType="i4"
+                      name="KDiscountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[containerid]"
+                      dataType="i4"
+                      name="containerid" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDiscountInNisFld]"
+                      dataType="i4"
+                      name="KDiscountInNisFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KRegistrationDateFld]"
+                      dataType="dbTimeStamp"
+                      name="KRegistrationDateFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KCategoryFld]"
+                      dataType="i4"
+                      name="KCategoryFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KDropoutReasonFld]"
+                      dataType="wstr"
+                      length="50"
+                      name="KDropoutReasonFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[KTotalAmountFld]"
+                      dataType="r8"
+                      name="KTotalAmountFld" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input].ExternalColumns[Update Date]"
+                      dataType="dbTimeStamp"
+                      name="Update Date" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\STG KRegistrationsTbl.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KRegistrationsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\STG KRegistrationsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\STG KRegistrationsTbl.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[Derived Column Output]"
+              endId="Package\Data Flow Task\STG KRegistrationsTbl.Inputs[OLE DB Destination Input]"
+              name="Derived Column Output"
+              startId="Package\Data Flow Task\Derived Column.Outputs[Derived Column Output]" />
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\Derived Column.Inputs[Derived Column Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\KRegistrationsTbl.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate KRegistrationsTbl"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{D4CD9AB4-2EBC-4FE9-8795-A97AA76F35EA}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate KRegistrationsTbl"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2017 RC1; © 2017 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{FED7313F-E642-42B5-B32F-18A20669D149}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [dbo].[KRegistrationsTbl]" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{6F9008DD-00BA-4150-A5F9-69A15A4F9657}"
+      DTS:From="Package\Truncate KRegistrationsTbl"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Data Flow Task" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="297,88" />
+        <NodeLayout
+          Size="206,42"
+          Id="Package\Truncate KRegistrationsTbl"
+          TopLeft="35,90" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="241,110">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="56,0"
+              Start="0,0"
+              End="48.5,0">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="48.5,0" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="161,42"
+          Id="Package\Data Flow Task\KRegistrationsTbl"
+          TopLeft="113,21" />
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Data Flow Task\Derived Column"
+          TopLeft="117,107" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="193.75,63">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="183,42"
+          Id="Package\Data Flow Task\STG KRegistrationsTbl"
+          TopLeft="105,193" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[Derived Column Output]"
+          TopLeft="195.25,149">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,44"
+              Start="0,0"
+              End="0,36.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,36.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\KRegistrationsTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\STG KRegistrationsTbl">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
